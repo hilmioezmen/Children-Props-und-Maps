@@ -7,7 +7,12 @@ class App extends Component {
 // state tanimlarken direk state yazip obje mantiginda yazabiliyoruz.constructur ve super yazmak gerekmiyor. EC6 ile gelen bir kullanim kolayligi
   
 
-state ={
+state ={ 
+    roles :[
+      'Manager',
+      'Trainer',
+      'Attendee'
+    ],
     persons:[
       {name:"Hilmi", age :"33"},
       {name:"Ridvan", age: "34"},
@@ -33,11 +38,18 @@ state ={
   //   ]
   // }
 
+ personCardOnClickhandler = (component) => {
+  console.log( `${component}  ${this.state.roles[2]}  called`);
+}
+
   render() {
     let personsOutput = this.state.persons.map( (item,i) => 
                 <PersonCard key= {i}
                             pName = {item.name} 
-                            pAge= {item.age} />
+                            pAge= {item.age}
+                            /* bu yonteme callback deniyor */
+                            click = {() => this.personCardOnClickhandler (item.name)}
+                            />
     );
 
 
@@ -67,6 +79,7 @@ state ={
           )} */    }     
           
           {personsOutput}
+          <button  onClick = { () => this.personCardOnClickhandler ('button') }> Click Me </button>
 
       </div>
     );
